@@ -37,7 +37,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'gestion'  # App antigua, será migrada,
+    
+    # Core apps
+    'core',
+    
+    # Modular apps
+    'apps.authentication',
+    'apps.inventory',
+    'apps.sales',
+    'apps.purchases',
+    'apps.employees',
+    'apps.analytics',
+    'apps.dashboard',
+    
+    # Old apps (commented out during migration)
+    # 'gestion',
 ]
 
 MIDDLEWARE = [
