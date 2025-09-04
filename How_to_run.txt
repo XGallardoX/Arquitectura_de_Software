@@ -1,4 +1,4 @@
-cd POS-Radiocity-main
+cd Arquitectura_de_Software
 python -m venv .venv
 # Activar entorno
 # Windows:
@@ -9,9 +9,11 @@ source .venv/bin/activate
 
 pip install -r requirements.txt
 
-cd webapp
+cd backend
 
 python datapp/populate_db.py
+
+cd webapp
 
 python manage.py migrate
 python manage.py runserver
