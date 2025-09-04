@@ -1,107 +1,79 @@
-# POS Radiocity
+# POS Radiocity - Sistema Modular
 
-Este proyecto es una aplicación web basada en **Django** y **SQLAlchemy** para la gestión de ventas y análisis de datos.
+Sistema de Punto de Venta completamente refactorizado con arquitectura modular Django.
 
-## 📦 Requisitos
+## 🚀 Inicio Rápido
 
-- Python 3.10+
-- pip (administrador de paquetes de Python)
-- [MySQL](https://dev.mysql.com/downloads/) o [MariaDB](https://mariadb.org/download/) (para la carga inicial de datos)
-- (Opcional) SQLite para pruebas locales (ya incluido en el repo con `db.sqlite3`)
-
-Instala las dependencias del proyecto con:
-
+### 1. Configurar Entorno
 ```bash
+# Clonar repositorio
+git clone [URL_DEL_REPO]
+cd POS-Radiocity
+
+# Crear y activar entorno virtual
+python -m venv venv
+source venv/Scripts/activate  # Windows Git Bash
+# source venv/bin/activate     # Linux/Mac
+
+# Instalar dependencias
 pip install -r requirements.txt
-```
-
----
-
-## 🚀 Ejecución del proyecto
-
-### 1. Poblar la base de datos (opcional si usas MySQL)
-Desde la raíz del proyecto:
-
-```bash
-python datapp/populate_db.py
-```
-
-Esto:
-- Limpia datos existentes.
-- Inserta datos iniciales desde `datos.json`.
-
----
-
-### 2. Migraciones de Django
-
-Entra en la carpeta `webapp` y corre:
-
-```bash
-cd webapp
+# Aplicar migraciones
 python manage.py migrate
-```
 
-Esto aplica todas las migraciones necesarias para las apps (`gestion`, `auth`, etc.).
-
----
-
-### 3. Levantar el servidor de desarrollo
-
-Desde la carpeta `webapp`:
-
-```bash
+# Crear usuario administrador
+python manage.py createsuperuser
+# Iniciar servidor de desarrollo
 python manage.py runserver
-```
 
-El servidor quedará disponible en:
+# Abrir navegador en: http://127.0.0.1:8000/
+python manage.py shell << 'USERS'
+from django.contrib.auth.models import User, Group
 
-👉 http://127.0.0.1:8000/
+# Usuario Administrador
+admin = User.objects.create_user('admin', 'admin@radiocity.com', 'admin123')
+admin.is_superuser = True
+admin.is_staff = True
+admin.save()
 
----
+# Usuario Empleado
+empleado = User.objects.create_user('empleado', 'empleado@radiocity.com', 'empleado123')
+empleado.save()
 
-## 🛠️ Comandos útiles
+print("Usuarios creados:")
+print("Admin: admin / admin123")
+print("Empleado: empleado / empleado123")
+USERS
+POS-Radiocity/
+├── config/                 # Configuración Django
+│   ├── settings/
+│   └── urls.py
+├── core/                   # Modelos compartidos
+│   ├── models.py
+│   └── services/
+├── apps/                   # Aplicaciones modulares
+│   ├── authentication/    # Login/logout
+│   ├── dashboard/         # Paneles principales
+│   ├── inventory/         # Gestión inventario
+│   ├── sales/            # Gestión ventas
+│   ├── purchases/        # Gestión compras
+│   ├── employees/        # Gestión empleados
+│   └── analytics/        # Reportes (futuro)
+├── templates/            # Templates globales
+├── static/              # CSS, JS, imágenes
+└── requirements.txt
+# Verificar configuración
+python manage.py check
 
-- Poblar datos con SQLAlchemy:
+# Ver migraciones
+python manage.py showmigrations
 
-  ```bash
-  python datapp/populate_db.py
-  ```
+# Acceder a shell de Django
+python manage.py shell
 
-- Borrar datos manualmente:
+# Crear nueva migración
+python manage.py makemigrations
 
-  ```bash
-  python datapp/clear_db.py
-  ```
+# Aplicar migraciones
+python manage.py migrate
+"
 
-- Migraciones Django:
-
-  ```bash
-  python manage.py makemigrations
-  python manage.py migrate
-  ```
-
-- Crear superusuario para el admin de Django:
-
-  ```bash
-  python manage.py createsuperuser
-  ```
-
-- Correr servidor:
-
-  ```bash
-  python manage.py runserver
-  ```
-
-
-
-## 📝 Notas
-
-- Si usas **WSL (Ubuntu en Windows)**, recuerda ejecutar los scripts desde la **raíz del proyecto**, por ejemplo:
-
-  ```bash
-  python datapp/populate_db.py
-  ```
-
-- No ejecutes `python datapp/populate_db.py` dentro de la carpeta `webapp/`, ya que esa ruta no existe allí.
-
----
