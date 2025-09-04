@@ -2,12 +2,14 @@
 
 Este proyecto es una aplicación web basada en **Django** y **SQLAlchemy** para la gestión de ventas y análisis de datos.
 
-## 📂 Estructura de módulos
+## 📂 Organización del backend
 
-Los módulos del proyecto se encuentran en la carpeta `backend/`:
+El código del proyecto vive en la carpeta `backend/`:
 
 - `backend/datapp`: scripts de carga de datos y dashboard de Streamlit.
 - `backend/webapp`: aplicación Django.
+
+El archivo `main.py` en la raíz ofrece una pequeña CLI para levantar cualquiera de estos servicios.
 
 ## 📦 Requisitos
 
@@ -16,24 +18,37 @@ Los módulos del proyecto se encuentran en la carpeta `backend/`:
 - [MySQL](https://dev.mysql.com/downloads/) o [MariaDB](https://mariadb.org/download/) (para la carga inicial de datos)
 - (Opcional) SQLite para pruebas locales (ya incluido en el repo con `db.sqlite3`)
 
-Instala las dependencias del proyecto con:
+### Configuración del entorno
 
-```bash
-pip install -r requirements.txt
-```
+1. Crea y activa un entorno virtual:
+
+   ```bash
+   python -m venv .venv
+   # Windows
+   .venv\Scripts\activate
+   # Linux/Mac
+   source .venv/bin/activate
+   ```
+
+2. Instala las dependencias del proyecto:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Ejecuta el backend (servidor Django):
+
+   ```bash
+   python main.py --app server
+   ```
+
+   Para lanzar el dashboard de Streamlit utiliza:
+
+   ```bash
+   python main.py --app dashboard
+   ```
 
 ---
-
-## 🚀 Ejecución del proyecto
-
-### Punto de entrada
-
-Desde la raíz del repositorio ejecuta el archivo `main.py` para iniciar los servicios:
-
-```bash
-python main.py dashboard  # Dashboard de Streamlit
-python main.py server     # Servidor Django
-```
 
 ### 1. Poblar la base de datos (opcional si usas MySQL)
 Desde la raíz del proyecto:
@@ -61,7 +76,7 @@ python backend/webapp/manage.py migrate
 ### 3. Levantar el servidor de desarrollo
 
 ```bash
-python main.py server
+python main.py --app server
 ```
 
 El servidor quedará disponible en:
@@ -100,7 +115,7 @@ El servidor quedará disponible en:
 - Correr servidor:
 
   ```bash
-  python main.py server
+  python main.py --app server
   ```
 
 
