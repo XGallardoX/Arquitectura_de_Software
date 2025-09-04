@@ -14,16 +14,20 @@ def run_django() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="CLI para levantar el dashboard de Streamlit o el servidor Django"
+        description="CLI para levantar el dashboard de Streamlit o el servidor Django",
     )
     parser.add_argument(
-        "command",
+        "--app",
         choices=["dashboard", "server"],
-        help="Selecciona 'dashboard' para Streamlit o 'server' para Django",
+        default="dashboard",
+        help=(
+            "Elige 'dashboard' para Streamlit (por defecto) "
+            "o 'server' para Django"
+        ),
     )
     args = parser.parse_args()
 
-    if args.command == "dashboard":
+    if args.app == "dashboard":
         run_dashboard()
     else:
         run_django()

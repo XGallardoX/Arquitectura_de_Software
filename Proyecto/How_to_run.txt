@@ -19,3 +19,9 @@ python manage.py migrate
 python manage.py runserver
 
 http://127.0.0.1:8000/admin # en el navegador
+
+# Alternativamente, puedes usar el script principal y elegir
+# entre el dashboard de Streamlit o el servidor Django:
+
+python ../main.py --app dashboard  # Levanta el dashboard
+python ../main.py --app server     # Levanta el servidor Django
