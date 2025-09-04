@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Modificar Producto - POS Radiocity{% endblock %}
+
+{% block content %}
+<h1>Modificar Producto</h1>
+
+<form method="post">
+   {% csrf_token %}
+   
+   <div class="form-group">
+       <label for="nombre">Nombre del Producto:</label>
+       <input type="text" id="nombre" name="nombre" value="{{ producto.nombre }}" required>
+   </div>
+   
+   <div class="form-group">
+       <label for="precio">Precio:</label>
+       <input type="number" step="0.01" id="precio" name="precio" value="{{ producto.precio }}" required>
+   </div>
+   
+   <div class="form-group">
+       <label for="stock">Stock:</label>
+       <input type="number" id="stock" name="stock" value="{{ producto.stock }}">
+   </div>
+   
+   <div class="form-group">
+       <label for="cantidad_medida">Cantidad por Medida:</label>
+       <input type="number" id="cantidad_medida" name="cantidad_medida" value="{{ producto.cantidad_medida }}">
+   </div>
+   
+   <div class="form-group">
+       <label for="unidad_medida">Unidad de Medida:</label>
+       <input type="text" id="unidad_medida" name="unidad_medida" value="{{ producto.unidad_medida }}">
+   </div>
+   
+   <button type="submit" class="btn btn-success">Actualizar Producto</button>
+   <a href="{% url 'inventory:inventario_panel' %}" class="btn">Cancelar</a>
+</form>
+{% endblock %}

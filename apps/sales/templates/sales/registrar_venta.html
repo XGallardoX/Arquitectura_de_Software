@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}Registrar Venta - POS Radiocity{% endblock %}
+
+{% block content %}
+<h1>Registrar Nueva Venta</h1>
+
+<form method="post">
+   {% csrf_token %}
+   
+   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+       <div>
+           <div class="form-group">
+               <label for="cliente">Cliente:</label>
+               <select id="cliente" name="cliente">
+                   <option value="">Cliente General</option>
+                   {% for cliente in clientes %}
+                   <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
+                   {% endfor %}
+               </select>
+           </div>
+           
+           <div class="form-group">
+               <label for="empleado">Empleado:</label>
+               <select id="empleado" name="empleado" required>
+                   {% for empleado in empleados %}
+                   <option value="{{ empleado.id }}">{{ empleado.nombre_completo }}</option>
+                   {% endfor %}
+               </select>
+           </div>
+       </div>
+       
+       <div>
+           <div class="form-group">
+               <label for="tipo_pago">Tipo de Pago:</label>
+               <select id="tipo_pago" name="tipo_pago" required>
+                   {% for tipo in tipos_pago %}
+                   <option value="{{ tipo.id }}">{{ tipo.nombre }}</option>
+                   {% endfor %}
+               </select>
+           </div>
+           
+           <div class="form-group">
+               <label for="tipo_impuesto">Impuesto:</label>
+               <select id="tipo_impuesto" name="tipo_impuesto" required>
+                   {% for impuesto in impuestos %}
+                   <option value="{{ impuesto.id }}">{{ impuesto.nombre }}</option>
+                   {% endfor %}
+               </select>
+           </div>
+       </div>
+   </div>
+   
+   <div class="form-group">
+       <label>Productos:</label>
+       <div id="productos-container">
+           <div class="producto-row">
+               <select name="producto" required>
+                   <option value="">Seleccionar producto...</option>
+                   {% for producto in productos %}
+                   <option value="{{ producto.id }}">{{ producto.nombre }} (Stock: {{ producto.stock }})</option>
+                   {% endfor %}
+               </select>
+               <input type="number" name="cantidad" placeholder="Cantidad" min="1" required>
+           </div>
+       </div>
+       <button type="button" onclick="agregarProducto()" class="btn">Agregar Producto</button>
+   </div>
+   
+   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+       <div class="form-group">
+           <label for="recibido">Cantidad Recibida:</label>
+           <input type="number" step="0.01" id="recibido" name="recibido" required>
+       </div>
+       
+       <div class="form-group">
+           <label for="propina">Propina:</label>
+           <input type="number" step="0.01" id="propina" name="propina" value="0">
+       </div>
+   </div>
+   
+   <button type="submit" class="btn btn-success">Procesar Venta</button>
+   <a href="{% url 'sales:ventas_panel' %}" class="btn">Cancelar</a>
+</form>
+
+<script>
+function agregarProducto() {
+   const container = document.getElementById('productos-container');
+   const newRow = document.querySelector('.producto-row').cloneNode(true);
+   newRow.querySelectorAll('input').forEach(input => input.value = '');
+   newRow.querySelector('select').selectedIndex = 0;
+   container.appendChild(newRow);
+}
+</script>
+{% endblock %}

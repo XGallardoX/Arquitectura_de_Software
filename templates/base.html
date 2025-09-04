@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>{% block title %}POS Radiocity{% endblock %}</title>
+   {% load static %}
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+   {% block extra_css %}{% endblock %}
+</head>
+<body>
+   <!-- Navbar -->
+   {% if user.is_authenticated %}
+   <nav class="navbar">
+       <a href="{% if user.is_superuser or user.groups.all|length > 0 %}{% url 'dashboard:panel_admin' %}{% else %}{% url 'dashboard:panel_user' %}{% endif %}">Dashboard</a>
+       <a href="{% url 'inventory:inventario_panel' %}">Inventario</a>
+       <a href="{% url 'sales:ventas_panel' %}">Ventas</a>
+       <a href="{% url 'purchases:compras_panel' %}">Compras</a>
+       {% if user.is_superuser or user.groups.all|length > 0 %}
+       <a href="{% url 'employees:empleados_panel' %}">Empleados</a>
+       <a href="{% url 'dashboard:opciones_panel' %}">Opciones</a>
+       {% endif %}
+       <a href="{% url 'authentication:logout' %}" style="float: right;">Cerrar Sesión</a>
+       <span style="float: right; color: white; margin-right: 15px;">{{ user.username }}</span>
+   </nav>
+   {% endif %}
+
+   <!-- Mensajes -->
+   {% if messages %}
+   <div class="messages">
+       {% for message in messages %}
+       <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+       {% endfor %}
+   </div>
+   {% endif %}
+
+   <!-- Contenido principal -->
+   <div class="container">
+       {% block content %}{% endblock %}
+   </div>
+
+   {% block extra_js %}{% endblock %}
+   <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

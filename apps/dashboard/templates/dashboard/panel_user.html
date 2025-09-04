@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Panel Usuario - POS Radiocity{% endblock %}
+
+{% block content %}
+<h1>Panel de Usuario</h1>
+
+<div class="stats-grid">
+   <div class="stats-card">
+       <div class="stats-number">${{ ventas_hoy_general|floatformat:2 }}</div>
+       <div>Ventas Hoy</div>
+   </div>
+   
+   <div class="stats-card">
+       <div class="stats-number">{{ cantidad_ventas_hoy }}</div>
+       <div>Facturas Hoy</div>
+   </div>
+   
+   {% if venta_promedio %}
+   <div class="stats-card">
+       <div class="stats-number">${{ venta_promedio|floatformat:2 }}</div>
+       <div>Promedio por Venta</div>
+   </div>
+   {% endif %}
+</div>
+
+<div style="margin-top: 30px;">
+   <a href="{% url 'sales:registrar_venta' %}" class="btn btn-success">Nueva Venta</a>
+   <a href="{% url 'sales:ventas_panel' %}" class="btn">Ver Ventas</a>
+   <a href="{% url 'inventory:inventario_panel' %}" class="btn">Ver Inventario</a>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Panel Administrador - POS Radiocity{% endblock %}
+
+{% block content %}
+<h1>Panel de Administrador</h1>
+
+<div class="stats-grid">
+   <div class="stats-card">
+       <div class="stats-number">${{ ventas_hoy_admin|floatformat:2 }}</div>
+       <div>Ventas Hoy</div>
+   </div>
+   
+   <div class="stats-card">
+       <div class="stats-number">{{ cantidad_ventas_hoy }}</div>
+       <div>Facturas Hoy</div>
+   </div>
+   
+   <div class="stats-card">
+       <div class="stats-number">{{ productos_sin_stock }}</div>
+       <div>Sin Stock</div>
+   </div>
+   
+   <div class="stats-card">
+       <div class="stats-number">${{ valor_total_inventario|floatformat:2 }}</div>
+       <div>Valor Inventario</div>
+   </div>
+</div>
+
+{% if productos_bajo_stock %}
+<h2>Productos con Stock Bajo</h2>
+<table>
+   <thead>
+       <tr>
+           <th>Producto</th>
+           <th>Stock</th>
+           <th>Precio</th>
+       </tr>
+   </thead>
+   <tbody>
+       {% for producto in productos_bajo_stock %}
+       <tr>
+           <td>{{ producto.nombre }}</td>
+           <td>{{ producto.stock }}</td>
+           <td>${{ producto.precio }}</td>
+       </tr>
+       {% endfor %}
+   </tbody>
+</table>
+{% endif %}
+
+<div style="margin-top: 30px;">
+   <a href="{% url 'inventory:inventario_panel' %}" class="btn">Gestionar Inventario</a>
+   <a href="{% url 'sales:ventas_panel' %}" class="btn">Gestionar Ventas</a>
+   <a href="{% url 'employees:empleados_panel' %}" class="btn">Gestionar Empleados</a>
+</div>
+{% endblock %}

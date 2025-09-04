@@ -1,21 +1,32 @@
 """
-URL configuration for POS Radiocity project.
+URLs principales del sistema POS Radiocity.
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
+Distribuye las rutas a cada aplicación modular.
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
-# URL patterns mínimas durante la migración
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    # Las URLs de las apps modulares se agregarán en el Paso 8
-    # path('', include('apps.authentication.urls')),
-    # path('inventario/', include('apps.inventory.urls')),
-    # path('ventas/', include('apps.sales.urls')),
+   # Admin de Django
+   path('admin/', admin.site.urls),
+   
+   # Autenticación
+   path('', include('apps.authentication.urls')),
+   
+   # Dashboard principal  
+   path('dashboard/', include('apps.dashboard.urls')),
+   
+   # Módulos principales
+   path('inventario/', include('apps.inventory.urls')),
+   path('ventas/', include('apps.sales.urls')),
+   path('compras/', include('apps.purchases.urls')),
+   path('empleados/', include('apps.employees.urls')),
+   path('reportes/', include('apps.analytics.urls')),
 ]
 
-# Comentar handlers de error temporalmente durante migración
-# handler404 = 'django.views.defaults.page_not_found'
-# handler500 = 'django.views.defaults.server_error'
+# Servir archivos estáticos en desarrollo
+if settings.DEBUG:
+   urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+   urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

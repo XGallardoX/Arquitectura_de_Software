@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Opciones - POS Radiocity{% endblock %}
+
+{% block content %}
+<h1>Configuración del Sistema</h1>
+
+<form method="post">
+   {% csrf_token %}
+   <div class="form-group">
+       <label for="prefijo">Prefijo de Facturas:</label>
+       <input type="text" id="prefijo" name="prefijo" value="{{ configuracion.prefijo|default:'' }}" placeholder="Ej: FAC-">
+       <small>Este prefijo aparecerá en todas las facturas generadas</small>
+   </div>
+   
+   <button type="submit" class="btn btn-success">Guardar Configuración</button>
+</form>
+
+<div style="margin-top: 30px;">
+   <a href="{% url 'dashboard:panel_admin' %}" class="btn">Volver al Dashboard</a>
+</div>
+{% endblock %}

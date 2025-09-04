@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Inventario - POS Radiocity{% endblock %}
+
+{% block content %}
+<h1>Gestión de Inventario</h1>
+
+<div style="margin: 20px 0;">
+   <form method="get" style="display: inline;">
+       <input type="text" name="nombre" value="{{ query_nombre }}" placeholder="Buscar producto..." class="search-box">
+       <button type="submit" class="btn">Buscar</button>
+   </form>
+   
+   {% if puede_editar %}
+   <a href="{% url 'inventory:registrar_producto' %}" class="btn btn-success" style="float: right;">Nuevo Producto</a>
+   {% endif %}
+</div>
+
+{% if productos %}
+<table>
+   <thead>
+       <tr>
+           <th>Nombre</th>
+           <th>Precio</th>
+           <th>Stock</th>
+           <th>Unidad</th>
+           {% if puede_editar %}<th>Acciones</th>{% endif %}
+       </tr>
+   </thead>
+   <tbody>
+       {% for producto in productos %}
+       <tr>
+           <td>{{ producto.nombre }}</td>
+           <td>${{ producto.precio }}</td>
+           <td>
+               {% if producto.stock == 0 %}
+               <span style="color: red;">Sin stock</span>
+               {% elif producto.stock < 10 %}
+               <span style="color: orange;">{{ producto.stock }}</span>
+               {% else %}
+               {{ producto.stock }}
+               {% endif %}
+           </td>
+           <td>{{ producto.cantidad_medida }} {{ producto.unidad_medida }}</td>
+           {% if puede_editar %}
+           <td>
+               <a href="{% url 'inventory:modificar_producto' producto.id %}" class="btn">Editar</a>
+           </td>
+           {% endif %}
+       </tr>
+       {% endfor %}
+   </tbody>
+</table>
+{% else %}
+<p>No se encontraron productos.</p>
+{% endif %}
+
+<div style="margin-top: 20px;">
+   <a href="{% url panel_url %}" class="btn">Volver al Dashboard</a>
+</div>
+{% endblock %}
