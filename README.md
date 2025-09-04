@@ -2,6 +2,13 @@
 
 Este proyecto es una aplicación web basada en **Django** y **SQLAlchemy** para la gestión de ventas y análisis de datos.
 
+## 📂 Estructura de módulos
+
+Los módulos del proyecto se encuentran en la carpeta `backend/`:
+
+- `backend/datapp`: scripts de carga de datos y dashboard de Streamlit.
+- `backend/webapp`: aplicación Django.
+
 ## 📦 Requisitos
 
 - Python 3.10+
@@ -19,11 +26,20 @@ pip install -r requirements.txt
 
 ## 🚀 Ejecución del proyecto
 
+### Punto de entrada
+
+Desde la raíz del repositorio ejecuta el archivo `main.py` para iniciar los servicios:
+
+```bash
+python main.py dashboard  # Dashboard de Streamlit
+python main.py server     # Servidor Django
+```
+
 ### 1. Poblar la base de datos (opcional si usas MySQL)
 Desde la raíz del proyecto:
 
 ```bash
-python datapp/populate_db.py
+python backend/datapp/populate_db.py
 ```
 
 Esto:
@@ -34,23 +50,18 @@ Esto:
 
 ### 2. Migraciones de Django
 
-Entra en la carpeta `webapp` y corre:
+Aplica las migraciones necesarias para las apps (`gestion`, `auth`, etc.) con:
 
 ```bash
-cd webapp
-python manage.py migrate
+python backend/webapp/manage.py migrate
 ```
-
-Esto aplica todas las migraciones necesarias para las apps (`gestion`, `auth`, etc.).
 
 ---
 
 ### 3. Levantar el servidor de desarrollo
 
-Desde la carpeta `webapp`:
-
 ```bash
-python manage.py runserver
+python main.py server
 ```
 
 El servidor quedará disponible en:
@@ -64,32 +75,32 @@ El servidor quedará disponible en:
 - Poblar datos con SQLAlchemy:
 
   ```bash
-  python datapp/populate_db.py
+  python backend/datapp/populate_db.py
   ```
 
 - Borrar datos manualmente:
 
   ```bash
-  python datapp/clear_db.py
+  python backend/datapp/clear_db.py
   ```
 
 - Migraciones Django:
 
   ```bash
-  python manage.py makemigrations
-  python manage.py migrate
+  python backend/webapp/manage.py makemigrations
+  python backend/webapp/manage.py migrate
   ```
 
 - Crear superusuario para el admin de Django:
 
   ```bash
-  python manage.py createsuperuser
+  python backend/webapp/manage.py createsuperuser
   ```
 
 - Correr servidor:
 
   ```bash
-  python manage.py runserver
+  python main.py server
   ```
 
 
@@ -99,9 +110,9 @@ El servidor quedará disponible en:
 - Si usas **WSL (Ubuntu en Windows)**, recuerda ejecutar los scripts desde la **raíz del proyecto**, por ejemplo:
 
   ```bash
-  python datapp/populate_db.py
+  python backend/datapp/populate_db.py
   ```
 
-- No ejecutes `python datapp/populate_db.py` dentro de la carpeta `webapp/`, ya que esa ruta no existe allí.
+- No ejecutes `python backend/datapp/populate_db.py` dentro de la carpeta `webapp/`, ya que esa ruta no existe allí.
 
 ---
