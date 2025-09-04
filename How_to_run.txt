@@ -1,4 +1,4 @@
-cd POS-Radiocity-main
+cd Proyecto
 python -m venv .venv
 # Activar entorno
 # Windows:
@@ -6,14 +6,11 @@ python -m venv .venv
 # Linux/Mac:
 source .venv/bin/activate
 
+pip install -r backend/requirements.txt
 
-pip install -r requirements.txt
+python backend/datapp/populate_db.py
 
-cd webapp
-
-python datapp/populate_db.py
-
-python manage.py migrate
-python manage.py runserver
+python backend/webapp/manage.py migrate
+python backend/webapp/manage.py runserver
 
 http://127.0.0.1:8000/admin # en el navegador

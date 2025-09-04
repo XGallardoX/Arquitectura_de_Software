@@ -19,7 +19,7 @@ Los módulos del proyecto se encuentran en la carpeta `backend/`:
 Instala las dependencias del proyecto con:
 
 ```bash
-pip install -r requirements.txt
+pip install -r backend/requirements.txt
 ```
 
 ---
@@ -28,7 +28,7 @@ pip install -r requirements.txt
 
 ### Punto de entrada
 
-Desde la raíz del repositorio ejecuta el archivo `main.py` para iniciar los servicios:
+Desde la carpeta `Proyecto/` ejecuta el archivo `main.py` para iniciar los servicios:
 
 ```bash
 python main.py dashboard  # Dashboard de Streamlit
