@@ -77,7 +77,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         # BASE_DIR = .../webapp/barapp  → el db.sqlite3 está en .../webapp
-        'NAME': (Path(__file__).resolve().parent.parent.parent / 'db.sqlite3'),
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
