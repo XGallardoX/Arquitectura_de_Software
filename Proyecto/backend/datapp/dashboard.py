@@ -7,10 +7,13 @@ from pathlib import Path
 
 
 def run_dashboard():
-    # ruta absoluta al db.sqlite3 (ajústala si corres desde otra carpeta)
-    # Ahora BASE_DIR apunta a la raíz del repositorio
-    BASE_DIR = Path(__file__).resolve().parent.parent.parent
-    DB_PATH = BASE_DIR / "backend" / "webapp" / "db.sqlite3"
+    """Renderiza el tablero de ventas.
+
+    Construye la ruta de la base de datos de forma relativa al
+    directorio ``backend`` para evitar dependencias de rutas absolutas.
+    """
+    BASE_DIR = Path(__file__).resolve().parent.parent  # .../Proyecto/backend
+    DB_PATH = BASE_DIR / "webapp" / "db.sqlite3"
 
     engine = create_engine(f"sqlite:///{DB_PATH}")
 
