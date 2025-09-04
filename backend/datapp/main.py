@@ -9,8 +9,9 @@ from pathlib import Path
 from sqlalchemy import create_engine
 
 # ruta absoluta al db.sqlite3 (ajústala si corres desde otra carpeta)
-BASE_DIR = Path(__file__).resolve().parent.parent  # carpeta raíz del repo
-DB_PATH = BASE_DIR / "webapp" / "db.sqlite3"
+# Ahora BASE_DIR apunta a la raíz del repositorio
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+DB_PATH = BASE_DIR / "backend" / "webapp" / "db.sqlite3"
 
 engine = create_engine(f"sqlite:///{DB_PATH}")
 

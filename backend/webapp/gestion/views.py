@@ -1,5 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from gestion.models import Compra, DetalleCompra, Producto, Proveedor, ConfiguracionFactura, Factura, DetalleFactura, Cliente, Empleado, DetalleImpuesto, TipoPago
+from backend.webapp.gestion.models import (
+    Compra,
+    DetalleCompra,
+    Producto,
+    Proveedor,
+    ConfiguracionFactura,
+    Factura,
+    DetalleFactura,
+    Cliente,
+    Empleado,
+    DetalleImpuesto,
+    TipoPago,
+)
 from decimal import Decimal
 from django.db import transaction
 from django.utils import timezone
@@ -9,7 +21,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
-from gestion.analytics.utils import ventas_por_dia, ventas_por_mes
+from backend.webapp.gestion.analytics.utils import ventas_por_dia, ventas_por_mes
 from django.db.models import Sum
 
 def login_view(request):

@@ -5,13 +5,13 @@ import datetime
 from decimal import Decimal
 
 import django
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "barapp.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.webapp.barapp.settings")
 django.setup()
 
 from django.db import transaction, connection
 from django.utils import timezone
 
-from gestion.models import (
+from backend.webapp.gestion.models import (
     DetalleImpuesto, Producto, Empleado, Cliente, TipoPago,
     Factura, DetalleFactura, ConfiguracionFactura
 )
