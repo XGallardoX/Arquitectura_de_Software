@@ -18,8 +18,13 @@ Este proyecto es un backend en Django para el curso de Arquitectura de Software.
 
 ```bash
 git clone https://github.com/XGallardoX/Arquitectura_de_Software/tree/fix-rutas
+````
 
-cd backend
+
+Ir al directorio de la aplicación:
+
+````
+cd proyecto/backend
 ````
 
 
@@ -33,16 +38,17 @@ source .venv/bin/activate  # Linux/macOS
 ````
 
 Instalar dependencias:
+
 ````
-bash
 pip install -r requirements.txt
 ````
 
-Ir al directorio de la aplicación:
+
+Ir a la app
 ````
-bash
 cd webapp
 ````
+
 
 Correr el servidor de desarrollo de Django:
 

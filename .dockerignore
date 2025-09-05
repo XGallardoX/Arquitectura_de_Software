@@ -1,0 +1,41 @@
+# Entornos virtuales
+venv/
+.venv/
+ENV/
+env/
+
+# Archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Base de datos local (se monta aparte o se gestiona con volumenes)
+db.sqlite3
+*.sqlite3
+
+# Archivos de logs
+*.log
+
+# Configuración de IDEs y del sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Archivos de Streamlit locales
+.streamlit/
+
+# Archivos de pruebas y coverage
+.coverage
+htmlcov/
+.tox/
+pytest_cache/
+
+# Archivos de distribución y build
+build/
+dist/
+*.egg-info/
+
+# Git
+.git
+.gitignore

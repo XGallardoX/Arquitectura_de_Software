@@ -1,0 +1,47 @@
+# Entornos virtuales
+venv/
+.venv/
+ENV/
+env/
+*.env
+
+# Archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos de base de datos locales (SQLite)
+db.sqlite3
+*.sqlite3
+
+# Archivos de logs
+*.log
+
+# Archivos de migraciones compilados
+*.pot
+*.mo
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Configuración de VSCode / PyCharm / IDEs
+.vscode/
+.idea/
+
+# Archivos de Streamlit
+.streamlit/
+
+# Archivos de Docker
+*.pid
+
+# Archivos de pruebas/coverage
+.coverage
+htmlcov/
+.tox/
+pytest_cache/
+
+# Archivos de distribución
+build/
+dist/
+*.egg-info/
