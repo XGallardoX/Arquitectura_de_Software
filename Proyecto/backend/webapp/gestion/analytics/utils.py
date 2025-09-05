@@ -1,5 +1,5 @@
 # analytics/utils.py
-from backend.webapp.gestion.models import DetalleFactura
+from gestion.models import DetalleFactura
 from django.db.models import Sum
 from django.db.models.functions import TruncDay, TruncMonth
 

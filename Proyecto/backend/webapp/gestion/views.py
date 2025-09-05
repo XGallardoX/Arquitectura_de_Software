@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from backend.webapp.gestion.models import (
+from .models  import (
     Compra,
     DetalleCompra,
     Producto,
@@ -21,7 +21,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
-from backend.webapp.gestion.analytics.utils import ventas_por_dia, ventas_por_mes
+from .analytics.utils import ventas_por_dia, ventas_por_mes
 from django.db.models import Sum
 
 def login_view(request):
