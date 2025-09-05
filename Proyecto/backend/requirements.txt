@@ -1,0 +1,7 @@
+altair==5.5.0
+Django==5.2.6
+Faker==37.6.0
+pandas==2.3.2
+reportlab==4.4.3
+SQLAlchemy==2.0.43
+streamlit==1.49.1
